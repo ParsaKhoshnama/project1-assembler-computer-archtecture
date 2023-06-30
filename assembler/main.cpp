@@ -395,5 +395,6 @@ int fillSymTab(struct symbolTable *symT,FILE *inputFile){
         }
         fprintf(outputFile,"%i\n",hex2int(hexCode));
     }
+    fclose(outputFile);
  }
 
