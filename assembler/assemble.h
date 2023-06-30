@@ -27,7 +27,6 @@ struct instruction{
    int space=0;
    int fill=0;
 };
-int registers[16];
 char *instructions[]={"add","sub","slt","or","nand",
    "addi","slti","ori","lui","lw","sw","beq","jalr",
    "j","halt"};
