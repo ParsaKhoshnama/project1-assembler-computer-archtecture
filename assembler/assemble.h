@@ -42,6 +42,4 @@ void secondRead(FILE* );
 void firstReadForinstructions(FILE* ,instruction* ,symbolTable* ,int  );
 int findLabelAddress(symbolTable* ,int ,char* );
 void secondRead(FILE* outputFile,instruction* instructions,int size,symbolTable* symT,int countOfSymbols);
-void fillHexCode(int x,char* hexCode,char* temp);
-int loadWordFunction(instruction ins);
 
