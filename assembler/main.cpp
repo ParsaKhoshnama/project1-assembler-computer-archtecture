@@ -4,7 +4,6 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-
     FILE *assp,*machp;
     int countOflabels=countOfSymbolsFirstRead(assp);
     symbolTable* symT=(symbolTable*)malloc(sizeof (symbolTable)*countOflabels);
@@ -80,6 +79,8 @@ int fillSymTab(struct symbolTable *symT,FILE *inputFile){
    line=(char *)malloc(72);
    fopen_s(&inputFile,"test.txt","r");
    while(fgets(line, lineSize,inputFile) !=NULL){
+       if(line[0]=='\n')
+           continue;
        if((line[0] == ' ') || (line[0] == '\t'));
       else{
        token=strtok(line,"\t, ");
@@ -113,6 +114,8 @@ int fillSymTab(struct symbolTable *symT,FILE *inputFile){
      fopen_s(&inputFile,"test.txt","r");
      while(fgets(line, lineSize,inputFile) !=NULL)
      {
+         if(line[0]=='\n')
+             continue;
         if((line[0] != ' ') && (line[0] != '\t'))
             i++;
      }
@@ -132,12 +135,13 @@ int fillSymTab(struct symbolTable *symT,FILE *inputFile){
      fopen_s(&inputFile,"test.txt","r");
      while(fgets(line, lineSize,inputFile) !=NULL)
      {
+         if(line[0]=='\n')
+             continue;
          j++;
          line=strtok(line,"\n");
          token=strtok(line,"\t, ");
          if((line[0] == ' ') || (line[0] == '\t'))
          {
-
               strcpy(instructionsArr[j].mnemonic,token);
          }
          else
@@ -146,7 +150,6 @@ int fillSymTab(struct symbolTable *symT,FILE *inputFile){
              token = strtok(token," ");
              strcpy(instructionsArr[j].mnemonic,token);
          }
-
          token = strtok(nullptr," ");
          if(strcmp(instructionsArr[j].mnemonic,"add")==0 ||strcmp(instructionsArr[j].mnemonic,"sub")==0 ||
                  strcmp(instructionsArr[j].mnemonic,"slt")==0 ||strcmp(instructionsArr[j].mnemonic,"or")==0||strcmp(instructionsArr[j].mnemonic,"nand")==0)
@@ -258,6 +261,7 @@ int fillSymTab(struct symbolTable *symT,FILE *inputFile){
           //   token=strtok(token,"\n");
              token=strtok(token,"#, ");
              instructionsArr[j].instType=JTYPE;
+             instructionsArr[j].imm=0;
              instructionsArr[j].opCode=14;
          }
          else if(strcmp(instructionsArr[j].mnemonic,".fill")==0)
